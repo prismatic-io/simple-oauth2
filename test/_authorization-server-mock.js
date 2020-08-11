@@ -1,6 +1,5 @@
 'use strict';
 
-const { URL } = require('url');
 const nock = require('nock');
 const Hoek = require('@hapi/hoek');
 const Boom = require('@hapi/boom');
@@ -14,11 +13,9 @@ const accessToken = {
 
 function createAuthorizationServer(authorizationServerUrl) {
   function tokenSuccessWithCustomPath(path, scopeOptions, params) {
-    return nock(authorizationServerUrl, scopeOptions)
-      .post(path, params)
-      .reply(200, accessToken, {
-        'Content-Type': 'application/json',
-      });
+    return nock(authorizationServerUrl, scopeOptions).post(path, params).reply(200, accessToken, {
+      'Content-Type': 'application/json',
+    });
   }
 
   function tokenSuccessWithRedirections(redirectionHost, scopeOptions, params) {
@@ -35,11 +32,9 @@ function createAuthorizationServer(authorizationServerUrl) {
   }
 
   function tokenSuccess(scopeOptions, params) {
-    return nock(authorizationServerUrl, scopeOptions)
-      .post('/oauth/token', params)
-      .reply(200, accessToken, {
-        'Content-Type': 'application/json',
-      });
+    return nock(authorizationServerUrl, scopeOptions).post('/oauth/token', params).reply(200, accessToken, {
+      'Content-Type': 'application/json',
+    });
   }
 
   function tokenError(scopeOptions, params) {
@@ -51,27 +46,21 @@ function createAuthorizationServer(authorizationServerUrl) {
   }
 
   function tokenAuthorizationError(scopeOptions, params) {
-    return nock(authorizationServerUrl, scopeOptions)
-      .post('/oauth/token', params)
-      .reply(401, Boom.unauthorized(), {
-        'Content-Type': 'application/json',
-      });
+    return nock(authorizationServerUrl, scopeOptions).post('/oauth/token', params).reply(401, Boom.unauthorized(), {
+      'Content-Type': 'application/json',
+    });
   }
 
   function tokenRevokeSuccess(scopeOptions, params) {
-    return nock(authorizationServerUrl, scopeOptions)
-      .post('/oauth/revoke', params)
-      .reply(240, null, {
-        'Content-Type': 'application/json',
-      });
+    return nock(authorizationServerUrl, scopeOptions).post('/oauth/revoke', params).reply(240, null, {
+      'Content-Type': 'application/json',
+    });
   }
 
   function tokenRevokeSuccessWithCustomPath(path, scopeOptions, params) {
-    return nock(authorizationServerUrl, scopeOptions)
-      .post(path, params)
-      .reply(204, null, {
-        'Content-Type': 'application/json',
-      });
+    return nock(authorizationServerUrl, scopeOptions).post(path, params).reply(204, null, {
+      'Content-Type': 'application/json',
+    });
   }
 
   function tokenRevokeError(scopeOptions, params) {
@@ -121,30 +110,39 @@ function getAccessToken() {
 }
 
 function getJSONEncodingScopeOptions(options = {}) {
-  return Hoek.applyToDefaults({
-    reqheaders: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+  return Hoek.applyToDefaults(
+    {
+      reqheaders: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     },
-  }, options);
+    options
+  );
 }
 
 function getFormEncodingScopeOptions(options = {}) {
-  return Hoek.applyToDefaults({
-    reqheaders: {
-      Accept: 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
+  return Hoek.applyToDefaults(
+    {
+      reqheaders: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
     },
-  }, options);
+    options
+  );
 }
 
 function getHeaderCredentialsScopeOptions(options = {}) {
-  return Hoek.applyToDefaults({
-    reqheaders: {
-      Accept: 'application/json',
-      Authorization: 'Basic dGhlK2NsaWVudCtpZDp0aGUrY2xpZW50K3NlY3JldA==',
+  return Hoek.applyToDefaults(
+    {
+      reqheaders: {
+        Accept: 'application/json',
+        Authorization: 'Basic dGhlK2NsaWVudCtpZDp0aGUrY2xpZW50K3NlY3JldA==',
+      },
     },
-  }, options);
+    options
+  );
 }
 
 module.exports = {

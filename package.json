@@ -20,11 +20,11 @@
     "node": ">=12"
   },
   "scripts": {
-    "pretest": "npm run lint",
+    "pretest": "yarn run lint",
     "test": "nyc ava",
     "lint": "eslint .",
     "docs-gen": "doctoc README.md --github --no-title",
-    "clean-install": "rm -rf node_modules && npm install"
+    "clean-install": "rm -rf node_modules && yarn install"
   },
   "nyc": {
     "check-coverage": true,

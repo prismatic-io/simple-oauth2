@@ -6,12 +6,16 @@
     "ecmaVersion": 2020
   },
   "rules": {
-    "max-len": ["error", {
-      "code": 120,
-      "ignoreComments": true
-    }],
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "ignoreComments": true
+      }
+    ],
     "strict": ["error", "safe"],
     "max-classes-per-file": ["off"],
-    "lines-between-class-members": ["off"]
+    "lines-between-class-members": ["off"],
+    "comma-dangle": "off"
   }
 }

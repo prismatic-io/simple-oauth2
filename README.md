@@ -11,7 +11,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Simple OAuth2](#simple-oauth2)
   - [Table of Contents](#table-of-contents)
   - [Requirements](#requirements)
@@ -19,7 +18,7 @@
     - [Supported Grant Types](#supported-grant-types)
       - [Authorization Code Grant](#authorization-code-grant)
       - [Resource Owner Password Credentials Grant](#resource-owner-password-credentials-grant)
-      - [Client Credentials Grant](#client-credentials-grant)
+      - [Client Credentials Grant](client-credentials-grant)
     - [Access Token](#access-token)
       - [Refresh an access token](#refresh-an-access-token)
       - [Revoke an access or refresh token](#revoke-an-access-or-refresh-token)
@@ -52,17 +51,17 @@ With a minimal configuration, create an client instace of any supported [grant t
 const config = {
   client: {
     id: '<client-id>',
-    secret: '<client-secret>'
+    secret: '<client-secret>',
   },
   auth: {
-    tokenHost: 'https://api.oauth.com'
-  }
+    tokenHost: 'https://api.oauth.com',
+  },
 };
 
 const { ClientCredentials, ResourceOwnerPassword, AuthorizationCode } = require('simple-oauth2');
 ```
 
-For a complete reference of configuration options, see the [API Options](./API.md#options)
+For a complete reference of configuration options, see the [API Options](./API.mdoptions)
 
 ### Supported Grant Types
 
@@ -79,7 +78,7 @@ async function run() {
   const authorizationUri = client.authorizeURL({
     redirect_uri: 'http://localhost:3000/callback',
     scope: '<scope>',
-    state: '<state>'
+    state: '<state>',
   });
 
   // Redirect example using Express (see http://expressjs.com/api.html#res.redirect)
@@ -160,7 +159,6 @@ On completion of any [supported grant type](#supported-grant-types) an access to
 #### Refresh an access token
 
 On long lived applications, it is often necessary to refresh access tokens. In such scenarios the access token is usually persisted in an external database by first serializing it.
-
 
 ```javascript
 async function run() {
@@ -272,7 +270,7 @@ async function run() {
 
   try {
     await client.getToken();
-  } catch(error) {
+  } catch (error) {
     console.log(error.output);
   }
 }
@@ -288,6 +286,7 @@ run();
 ```
 
 ## Debugging the module
+
 This module uses the [debug](https://github.com/visionmedia/debug) module to help on error diagnosis. Use the following environment variable to help in your debug journey:
 
 ```
@@ -306,7 +305,7 @@ See [CONTRIBUTING](./CONTRIBUTING.md)
 
 Special thanks to the following people for submitting patches.
 
-* [Jonathan Samines](https://github.com/jonathansamines)
+- [Jonathan Samines](https://github.com/jonathansamines)
 
 ## Changelog
 
